@@ -2,7 +2,23 @@
 
 int main()
 {
-	printf("asdasdasd");
+	int floor = 0;
+	printf("숫자를 입력하세요: ");
+	scanf("%d", &floor);
+
+	for (int i = 0; i < floor; i++)
+	{
+		for (int j = 0; j < floor - i; j++)
+		{
+			printf(" ");
+		}
+		for (int j = 0; j < 2 * i + 1; j++)
+		{
+			printf("*");
+
+		}
+		printf("\n");
+	}
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
