@@ -1,9 +1,132 @@
 ﻿#include <stdio.h>
+//맵 데이터
+#define MAP_Y 10
+#define MAP_X 10
+#define WALL 1
+#define ROAD 0
+#define GEM 2
+//이동관련
+#define UP 1
+#define DOWN 2
+#define RIGHT 3
+#define LEFT 4
+
+int main()
+{
+	int map[MAP_Y][MAP_X] = {
+		{0,1,1,1,1,1,1,1,1,1},
+		{0,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,0,1},
+		{1,0,0,0,0,0,1,1,0,1},
+		{1,0,0,2,0,0,1,1,0,1},
+		{1,1,1,1,1,0,1,1,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1},
+	};
+	int playerY = 0, playerX = 0;
+	int select = 0;
+	while (1)
+	{
+		for (int i = 0; i < MAP_Y; i++)
+		{
+			for (int j = 0; j < MAP_X; j++)
+			{
+				if (map[i][j] == ROAD) // ROAD안에 플레이어추가
+				{
+					if (playerY == i && playerX == j)
+					{
+						printf("♀");
+					}
+					else
+						printf("□");
+				}
+				else if (map[i][j] == WALL)
+				{
+					printf("■");
+				}
+				else if (map[i][j] == GEM)
+				{
+					printf("◈");
+				}
+			}
+			printf("\n");
+		}
+		printf("1.위 2.아래 3.오른쪽 4.왼쪽 5.종료\n");
+		scanf("%d", &select);
+
+		switch (select)
+		{
+		case UP:
+			if (playerY - 1 >= 0)
+			{
+				if (map[playerY - 1][playerX] == ROAD)
+				{
+					playerY--;
+				}
+				else if (map[playerY - 1][playerX] == GEM)
+				{
+					printf("축하합니다! 보석을 찾았습니다.\n");
+					playerX = 0, playerY = 0;
+
+				}
+			}
+			break;
+		case DOWN:
+			if (playerY + 1 < MAP_Y)
+			{
+				if (map[playerY + 1][playerX] == ROAD)
+				{
+					playerY++;
+				}
+				else if (map[playerY + 1][playerX] == GEM)
+				{
+					printf("축하합니다! 보석을 찾았습니다.\n");
+					playerX = 0, playerY = 0;
+
+				}
+			}
+			break;
+		case RIGHT:
+			if (playerX + 1 < MAP_X)
+			{
+				if (map[playerY][playerX+1] == ROAD)
+				{
+					playerX++;
+				}
+				else if (map[playerY][playerX+1] == GEM)
+				{
+					printf("축하합니다! 보석을 찾았습니다.\n");
+					playerX = 0, playerY = 0;
+
+				}
+			}
+			break;
+		case LEFT:
+			if (playerX - 1 >= 0)
+			{
+				if (map[playerY][playerX - 1] == ROAD)
+				{
+					playerX--;
+				}
+				else if (map[playerY][playerX - 1] == GEM)
+				{
+					printf("축하합니다! 보석을 찾았습니다.\n");
+					playerX = 0, playerY = 0;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+}
 
 // 2021.03.26 < 반복문 >
 
-void main()
-{
+//void main()
+//{
 	// while문 -> 조건이 만족되지 않으면 그냥 끝내는
 	// do~while문 -> 조건이 만족이 안되더라도 1회는 무족건 실행하는 반복문
 	/*int i = 0;
@@ -76,12 +199,12 @@ void main()
 
 	// 반복문을 이용할때는 내 목적에 따라서 어떤 반복문을 이용할지 선택해서 이용할 필요가 있다.
 
-	for (int i = 0; i < 10; i = i + 1)
-	{
-		printf("A");
-		continue;
-	}
-}
+//	for (int i = 0; i < 10; i = i + 1)
+//	{
+//		printf("A");
+//		continue;
+//	}
+//}
 
 
 // --------------------------------------------------------------
